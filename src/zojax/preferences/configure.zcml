@@ -1,0 +1,74 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.preferences">
+
+  <permission
+     id="zojax.ModifyPreference"
+     title="Modify preference" />
+
+  <role
+     id="preference.Owner"
+     title="Preference group owner" />
+
+  <grant
+     permission="zojax.ModifyPreference"
+     role="preference.Owner" />
+
+  <!-- default preference group storage -->
+  <adapter factory=".storage.getDefaultStorage" />
+
+  <!-- root preference group -->
+  <utility
+     provides=".interfaces.IPreferenceGroup"
+     factory=".root.PersonalPreferences" />
+
+  <class class=".root.PersonalPreferences">
+    <require
+       permission="zope.Public"
+       interface=".interfaces.IPreferenceGroup
+                  zope.interface.common.mapping.IEnumerableMapping" />
+  </class>
+
+  <!-- preference group roles -->
+  <adapter factory=".roles.PreferenceGroupRoles" />
+
+  <!-- preference group publisher -->
+  <adapter
+     for=".interfaces.IPreferenceGroup *"
+     factory="z3c.traverser.traverser.PluggableTraverser"
+     provides="zope.publisher.interfaces.IPublishTraverse" />
+
+  <subscriber
+     for=".interfaces.IPreferenceGroup *"
+     provides="z3c.traverser.interfaces.ITraverserPlugin"
+     factory=".publisher.PreferenceTraverserPlugin" />
+
+  <!-- predefined preference group -->
+  <zojax:preferenceGroup
+     id="portal"
+     title="Portal preferences"
+     description="These are all the preferences related to common portal settings."
+     schema="zojax.preferences.interfaces.IPortalPreferences" />
+
+  <zojax:preferenceGroup
+     id="membership"
+     title="Membership preferences"
+     description="These are all the preferences related to portal membership."
+     schema=".interfaces.IMembershipPreferences" />
+
+  <!-- removing principal event handler -->
+  <subscriber
+     for="zojax.authentication.interfaces.IPrincipalRemovingEvent"
+     handler=".storage.principalRemovingHandler"
+     zcml:condition="installed zojax.authentication" />
+
+  <!-- browser views -->
+  <include package=".browser" />
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales"/>
+
+</configure>

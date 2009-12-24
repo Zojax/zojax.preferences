@@ -1,0 +1,49 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zope">
+
+  <interface
+     name="DefaultSkin"
+     interface=".tests.IDefaultSkin"
+     type="zope.publisher.interfaces.browser.IBrowserSkinType" />
+
+  <zojax:pagelet
+     name="test.html"
+     for="*"
+     template="test.pt"
+     permission="zope.Public" />
+
+  <zojax:preferenceGroup
+     id="category"
+     schema=".interfaces.ICategory"
+     title="Category"
+     accesspermission="zope.Public"
+     provides="zojax.preferences.interfaces.IPreferenceCategory" />
+
+  <zojax:preferenceGroup
+     id="category.prefs1"
+     schema=".interfaces.IPrefs1"
+     title="Preferences 1"
+     accesspermission="zope.Public" />
+
+  <zojax:preferenceGroup
+     id="category.prefs2"
+     schema=".interfaces.IPrefs2"
+     title="Preferences 2"
+     accesspermission="zope.Public" />
+
+  <zojax:preferenceGroup
+     id="category.prefs3"
+     schema=".interfaces.IPrefs3"
+     title="Preferences 3"
+     accesspermission="zope.Public"
+     tests="zojax.preferences.tests.tests.notAvailable" />
+
+  <zojax:preferenceGroup
+     id="portal.prefs4"
+     schema=".interfaces.IPrefs4"
+     title="Preferences 4"
+     accesspermission="zope.Public" />
+
+</configure>

@@ -1,0 +1,167 @@
+====================
+Personal preferences
+====================
+
+  >>> from zope import component, interface, event
+  >>> from zope.app.component.hooks import setSite
+  >>> from zope.security.management import newInteraction, endInteraction
+  >>> from zope.app.security.interfaces import IAuthentication
+  >>> from zope.securitypolicy.interfaces import IPrincipalRoleMap
+  >>> from zojax.preferences.tests.interfaces import IPrefs1
+
+  >>> root = getRootFolder()
+  >>> setSite(root)
+  >>> auth = component.getUtility(IAuthentication)
+  >>> principal = auth.getPrincipal('zope.user')
+
+  >>> class Participation:
+  ...     interaction = None
+  ...     def __init__(self, principal):
+  ...         self.principal = principal
+
+  >>> newInteraction(Participation(principal))
+
+  >>> prefs = IPrefs1(principal)
+
+  >>> roles = IPrincipalRoleMap(prefs)
+  >>> roles.getPrincipalsForRole('preference.Owner')
+  (('zope.user', PermissionSetting: Allow),)
+  >>> roles.getPrincipalsForRole('content.Owner')
+  ()
+
+  >>> roles.getRolesForPrincipal('zope.user')
+  (('preference.Owner', PermissionSetting: Allow),)
+  >>> roles.getRolesForPrincipal('zope.manager')
+  ()
+
+  >>> roles.getSetting('preference.Owner', 'zope.user')
+  PermissionSetting: Allow
+
+  >>> roles.getSetting('content.Owner', 'zope.manager')
+  PermissionSetting: Unset
+
+  >>> roles.getPrincipalsAndRoles()
+  ()
+
+  >>> from zojax.preferences.utils import hasEditableFields
+  >>> hasEditableFields(prefs)
+  True
+
+  >>> endInteraction()
+
+Browser
+
+  >>> from zope.testbrowser.testing import Browser
+
+  >>> user = Browser()
+  >>> user.handleErrors = False
+  >>> user.open("http://localhost/preferences/")
+  Traceback (most recent call last):
+  ...
+  Unauthorized: preferences
+
+  >>> user.addHeader("Authorization", "Basic user:userpw")
+
+  >>> user.open("http://localhost/preferences/")
+  >>> print user.contents
+  <html>
+  ...
+  ...<h1 class="z-prefs-title">Personal preferences</h1><div class="z-page-description">This area allows you to change personal preferences.</div><div class="z-prefs-content"><div class="z-form">
+  <ul class="z-listing">
+    <li>
+       <div class="z-listing-details">
+          <a href="category/">
+            Category</a>
+          <div> &nbsp;</div>
+          <ul class="z-listing">
+            <li>
+              <div class="z-listing-details">
+                <a href="category/prefs1/">
+                  Preferences 1</a>
+                <div> 
+                  &nbsp;</div>
+              </div>
+            </li>
+            <li>
+              <div class="z-listing-details">
+                <a href="category/prefs2/">
+                  Preferences 2</a>
+                <div> 
+                  &nbsp;</div>
+            </div>
+          </li>
+        </ul>
+        <div class="visualClear"></div>
+      </div>
+    </li>
+    <li>
+      <div class="z-listing-details">
+        <a href="portal/">
+           Portal preferences</a>
+        <div>These are all the preferences related to common portal settings. &nbsp;</div>
+        <div class="visualClear"></div>
+      </div>
+    </li>
+  </ul>
+  <div class="visualClear"></div>
+  ...
+  </html>
+
+  >>> user.open("http://localhost/preferences/category/")
+  >>> print user.contents
+  <html>
+  ...
+  <div class="z-prefs-nav">
+    <div class="z-prefs-nav-item-selected">
+       <div class="z-level1">
+         <a href="http://localhost/preferences/category/" title="">
+           Category
+         </a>
+       </div>
+    </div>
+    <div class="z-prefs-nav-item">
+      <div class="z-level1">
+        <a href="http://localhost/preferences/portal/"
+           title="These are all the preferences related to common portal settings.">
+            Portal preferences
+        </a>
+      </div>
+    </div>
+  </div>
+  ...
+  ...<h1 class="z-prefs-title">Category</h1><div class="z-page-description"></div><div class="z-prefs-content"><div class="z-form z-form-edit"><form action="http://localhost/preferences/category/index.html" method="post" enctype="multipart/form-data" name="category" id="category">
+    <h1 class="z-form-label">Category</h1><div class="z-form-fieldset">
+      <div class="z-form-field">
+      <label for="category-widgets-category" title="">Category</label>
+      <div class="z-form-help"></div>
+      <div><input type="text" id="category-widgets-category"
+           name="category.widgets.category"
+           class="text-widget textline-field" value="" />
+      </div>
+    </div>
+    </div>
+      <div class="z-form-controls">
+      <span>
+        <hr />
+        <input type="submit" id="category-buttons-save"
+           name="category.buttons.save"
+           class="z-form-savebutton button-field" value="Save" />
+      </span>
+    </div>
+    </form></div><div class="z-form">
+      <h2><a href="http://localhost/preferences/category/prefs1/">Preferences 1</a></h2><div class="discreet"></div><br />
+      <h2><a href="http://localhost/preferences/category/prefs2/">Preferences 2</a></h2><div class="discreet"></div><br />
+    </div></div></div>
+  ...
+  </html>
+
+  >>> user.getLink('Preferences 1').click()
+  >>> user.getControl('Name').value = 'Nikolay'
+  >>> user.getControl(name="category.prefs1.buttons.save").click()
+  >>> 'Data successfully updated.' in user.contents
+  True
+
+  >>> user.open("http://localhost/preferences/category/unknown/")
+  Traceback (most recent call last):
+  ...
+  NotFound: Object: ... name: u'unknown'

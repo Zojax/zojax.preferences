@@ -1,0 +1,34 @@
+<div class="z-form">
+  <ul class="z-listing">
+    <li tal:repeat="item view/groups">
+      <tal:block tal:define="group item/group">
+	<div class="z-listing-icon" tal:define="icon group/@@zmi_icon|nothing"
+	     tal:condition="icon">
+	  <tal:block tal:condition="icon" tal:content="structure icon"/>
+	</div>
+	<div class="z-listing-details">
+	  <a tal:attributes="href string:${group/__id__}/">
+	    <tal:block tal:content="group/__title__"/></a>
+	  <div><tal:block tal:content="group/__description__"/> &nbsp;</div>
+
+	  <ul class="z-listing" tal:condition="item/subgroups">
+	    <li tal:repeat="sgroup item/subgroups">
+	      <div class="z-listing-icon" tal:define="icon sgroup/group/@@zmi_icon|nothing"
+		   tal:condition="icon">
+		<tal:block tal:condition="icon" tal:content="structure icon" />
+	      </div>
+	      <div class="z-listing-details">
+		<a tal:attributes="href string:${group/__id__}/${sgroup/id}/">
+		  <tal:block tal:content="sgroup/group/__title__"/></a>
+		<div><tal:block tal:content="sgroup/group/__description__"/> 
+		  &nbsp;</div>
+	      </div>
+	    </li>
+	  </ul>
+	  <div class="visualClear"></div>
+	</div>
+      </tal:block>
+    </li>
+  </ul>
+  <div class="visualClear"></div>
+</div>

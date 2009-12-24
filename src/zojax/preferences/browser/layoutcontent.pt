@@ -1,0 +1,6 @@
+<h1 class="z-prefs-title" tal:content="layoutcontext/__title__"></h1>
+<div class="z-page-description" tal:content="layoutcontext/__description__"></div>
+
+<div class="z-prefs-content" tal:content="structure view/render">
+  [rendered body]
+</div>

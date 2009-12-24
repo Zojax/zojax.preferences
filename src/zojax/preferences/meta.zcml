@@ -1,0 +1,23 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:meta="http://namespaces.zope.org/meta">
+  
+  <meta:directives namespace="http://namespaces.zope.org/zojax">
+
+    <meta:complexDirective
+       name="preferenceGroup"
+       schema=".zcml.IPreferenceGroupDirective"
+       handler=".zcml.PreferenceGroupDirective">
+
+      <meta:subdirective
+         name="allow"
+         schema="zope.app.component.metadirectives.IAllowSubdirective" />
+      
+      <meta:subdirective
+         name="require"
+         schema="zope.app.component.metadirectives.IRequireSubdirective" />
+    </meta:complexDirective>
+
+  </meta:directives>
+
+</configure>

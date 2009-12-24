@@ -1,0 +1,101 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.preferences">
+
+  <!-- layouts -->
+  <zojax:layout
+     layout="portal"
+     name="workspace"
+     for="..interfaces.IRootPreferences"
+     template="layout.pt"
+     hidden="yes" />
+
+  <zojax:layout
+     layout="workspace"
+     for="..interfaces.IPreferenceCategory"
+     template="layoutcontent.pt"
+     hidden="yes" />
+
+  <!-- pagelet types -->
+  <zojax:pageletType
+     name="preference.editGroup"
+     interface=".interfaces.IEdit" />
+
+  <zojax:pageletType
+     name="preference.previewGroup"
+     interface=".interfaces.IPreview" />
+
+  <!-- browser view -->
+  <adapter
+     name="preferences"
+     provides="zope.publisher.interfaces.browser.IBrowserView"
+     factory=".preferences.getPreferences" />
+
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IPreferenceGroup" />
+
+  <browser:menuItem
+     action="index.html"
+     for="..interfaces.IPreferenceGroup"
+     menu="zmi_views"
+     title="View"
+     permission="zope.Public" />
+
+  <!-- root preferences view -->
+  <zojax:pagelet
+     for="..interfaces.IRootPreferences"
+     name="index.html"
+     template="index.pt"
+     class=".index.PreferencesView"
+     permission="zope.View" />
+
+  <!-- preference group view -->
+  <zojax:pagelet
+     name="index.html"
+     for="..interfaces.IPreferenceGroup"
+     template="group.pt"
+     class=".group.PreferenceGroup"
+     permission="zope.Public" />
+
+  <zojax:pagelet
+     name="index.html"
+     for="..interfaces.IPreferenceCategory"
+     template="groupcategory.pt"
+     class=".group.PreferenceGroup"
+     permission="zope.Public" />
+
+  <zojax:pagelet
+     type="preference.editGroup"
+     for="..interfaces.IPreferenceGroup"
+     class=".group.PreferenceGroupView" />
+
+  <zojax:pagelet
+     type="preference.previewGroup"
+     for="..interfaces.IPreferenceGroup"
+     template="grouppreview.pt" />
+
+  <!-- navigation -->
+  <browser:viewletManager
+     name="zojax.preferences-navigation"
+     provides=".interfaces.IPreferencesNavigation"
+     for="..interfaces.IPreferenceGroup"
+     template="navigation.pt"
+     class=".navigation.Navigation"
+     permission="zope.Public" />
+
+  <!-- breadcrumb -->
+  <adapter
+     zcml:condition="installed z3c.breadcrumb"
+     factory=".breadcrumb.PreferenceGroupBreadcrumb" />
+
+  <!-- styles -->
+  <zojax:resourceinclude
+     name="zojax-preferences.css"
+     library="zojax" type="stylesheet"
+     file="styles.css" filetype="zrt" />
+
+</configure>

@@ -1,0 +1,26 @@
+<tal:block tal:repeat="viewlet view/viewlets"
+           tal:content="structure viewlet/render" />
+
+<div class="z-prefs-nav">
+  <tal:block tal:repeat="item view/data">
+    <metal:block metal:define-macro="level">
+      <div class="z-prefs-nav-item"
+	   tal:attributes="class python:item['selected'] and 'z-prefs-nav-item-selected' 
+			   or 'z-prefs-nav-item'">
+	<div tal:omit-tag="not:item/level|nothing"
+	     tal:attributes="class string:z-level${item/level|nothing}">
+	  <a tal:attributes="href string:${item/prefs/@@absolute_url}/;
+			     title item/description"
+	     tal:omit-tag="not:item/editable">
+	    <tal:block tal:content="structure item/icon" />
+	    <tal:block tal:content="item/title" />
+	  </a>
+	</div>
+      </div>
+      <tal:block tal:repeat="item item/items">
+	<metal:block use-macro="view/template/macros/level"/>
+      </tal:block>
+    </metal:block>
+  </tal:block>
+</div>
+

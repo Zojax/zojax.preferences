@@ -1,0 +1,85 @@
+/* zrt-cssregistry: */
+
+@media all {
+
+  #z-preferences {
+    padding: 1.5em;
+    border: borderWidth borderStyle globalBorderColor;
+    background-color: globalBackgroundColor;
+    margin: 2em 1.5em 1.5em 1.5em;
+    font-size: 110%;
+  }
+
+  #z-preferences .z-prefs-title {
+    font-weight: bold;
+  }
+
+  #z-preferences h1 {
+    font-size: 130%;
+    font-weight: bold;
+  }
+
+  #z-preferences h2 {
+    font-size: 120%;
+  }
+
+  #z-preferences h2 {
+    font-size: 130%;
+  }
+
+  #z-preferences table.z-prefs-layout {
+    width: 100%;
+  }
+  
+  #z-preferences table.z-prefs-layout tr { 
+    vertical-align: top;
+  }
+  
+  #z-preferences .z-prefs-nav-column {
+    width: 200px;
+  }
+
+  #z-preferences .z-prefs-nav-wrapper { 
+    padding-right: 1em;
+  }
+  
+  .z-prefs-nav {
+    border: borderWidth borderStyle globalBorderColor;
+    border-bottom: none;
+    background: contentBackgroundColor;
+    font-size: fontSmallSize;
+  }
+  
+  .z-prefs-nav a {
+    text-decoration: none;
+  }
+  
+  .z-prefs-nav-item {
+    padding: 0.8em 0.4em 0.5em 0.4em;
+    border-bottom: borderWidth borderStyle globalBorderColor;
+  }
+  
+  .z-prefs-nav-item-selected {
+    padding: 0.8em 0.4em 0.5em 0.4em;
+    background-color: globalBackgroundColor;
+    border-bottom: borderWidth borderStyle globalBorderColor;
+  }
+  
+  .z-prefs-nav-item:hover {
+    background-color: globalBackgroundColor;
+  }
+  
+  .z-prefs-nav-item li span {
+    border: 0;
+    border-bottom: 1px dotted discreetColor;
+  }
+
+  #z-preferences .z-form,
+  #z-preferences .z-form-add,
+  #z-preferences .z-form-edit {
+    border: borderWidth borderStyle globalExtraBorderColor;
+    margin-top: 0em;
+    padding: 1em;
+    background: contentBackgroundColor;
+  }
+}

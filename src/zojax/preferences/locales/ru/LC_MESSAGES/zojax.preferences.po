@@ -1,0 +1,56 @@
+# #############################################################################
+#
+# Copyright (c) 2009 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+# #############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Wed Oct 22 13:53:30 2008\n"
+"PO-Revision-Date: 2008-10-22 14:15+0600\n"
+"Last-Translator: Nikolay Kim <fafhrd91@gmail.com>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/preferences/browser/breadcrumb.py:30
+msgid "Preferences"
+msgstr "Настройки"
+
+#: src/zojax/preferences/configure.zcml:13
+msgid "Preference group owner"
+msgstr ""
+
+#: src/zojax/preferences/configure.zcml:51
+msgid "These are all the preferences related to common portal settings."
+msgstr "В этой категории вы можете изменить общие настройки сайта."
+
+#: src/zojax/preferences/configure.zcml:51
+msgid "Portal preferences"
+msgstr "Настройки сайта"
+
+#: src/zojax/preferences/configure.zcml:9
+msgid "Modify preference"
+msgstr "Изменить настройки"
+
+#: src/zojax/preferences/preferencetype.py:194
+msgid "Field is readonly"
+msgstr "Поле только для чтения"
+
+#: src/zojax/preferences/root.py:31
+msgid "Personal preferences"
+msgstr "Персональные настройки"
+
+#: src/zojax/preferences/root.py:32
+msgid "This area allows you to change personal preferences."
+msgstr "В этой категории вы можете изменить персональные настройки."
