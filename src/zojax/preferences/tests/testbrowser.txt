@@ -78,7 +78,7 @@ Browser
               <div class="z-listing-details">
                 <a href="category/prefs1/">
                   Preferences 1</a>
-                <div> 
+                <div>
                   &nbsp;</div>
               </div>
             </li>
@@ -86,7 +86,7 @@ Browser
               <div class="z-listing-details">
                 <a href="category/prefs2/">
                   Preferences 2</a>
-                <div> 
+                <div>
                   &nbsp;</div>
             </div>
           </li>
@@ -134,18 +134,21 @@ Browser
       <div class="z-form-field">
       <label for="category-widgets-category" title="">Category</label>
       <div class="z-form-help"></div>
-      <div><input type="text" id="category-widgets-category"
+      <div>
+        <input id="category-widgets-category"
            name="category.widgets.category"
-           class="text-widget textline-field" value="" />
+           class="text-widget textline-field" value=""
+           type="text" />
       </div>
     </div>
     </div>
       <div class="z-form-controls">
       <span>
         <hr />
-        <input type="submit" id="category-buttons-save"
+        <input id="category-buttons-save"
            name="category.buttons.save"
-           class="z-form-savebutton button-field" value="Save" />
+           class="z-form-savebutton button-field" value="Save"
+           type="submit" />
       </span>
     </div>
     </form></div><div class="z-form">
