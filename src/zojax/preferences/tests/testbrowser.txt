@@ -111,52 +111,21 @@ Browser
   >>> print user.contents
   <html>
   ...
-  <div class="z-prefs-nav">
-    <div class="z-prefs-nav-item-selected">
-       <div class="z-level1">
-         <a href="http://localhost/preferences/category/" title="">
-           Category
-         </a>
-       </div>
-    </div>
-    <div class="z-prefs-nav-item">
-      <div class="z-level1">
-        <a href="http://localhost/preferences/portal/"
-           title="These are all the preferences related to common portal settings.">
-            Portal preferences
-        </a>
-      </div>
-    </div>
-  </div>
+  ...Category
+  ...
+  ...Portal preferences
   ...
   ...<h1 class="z-prefs-title">Category</h1><div class="z-page-description"></div><div class="z-prefs-content"><div class="z-form z-form-edit"><form action="http://localhost/preferences/category/index.html" method="post" enctype="multipart/form-data" name="category" id="category">
     <h1 class="z-form-label">Category</h1><div class="z-form-fieldset">
-      <div class="z-form-field">
-      <label for="category-widgets-category" title="">Category</label>
-      <div class="z-form-help"></div>
-      <div>
-        <input id="category-widgets-category"
-           name="category.widgets.category"
-           class="text-widget textline-field" value=""
-           type="text" />
-      </div>
-    </div>
-    </div>
-      <div class="z-form-controls">
-      <span>
-        <hr />
-        <input id="category-buttons-save"
-           name="category.buttons.save"
-           class="z-form-savebutton button-field" value="Save"
-           type="submit" />
-      </span>
-    </div>
-    </form></div><div class="z-form">
-      <h2><a href="http://localhost/preferences/category/prefs1/">Preferences 1</a></h2><div class="discreet"></div><br />
-      <h2><a href="http://localhost/preferences/category/prefs2/">Preferences 2</a></h2><div class="discreet"></div><br />
-    </div></div></div>
+  ...
+  </form></div><div class="z-form">
+    <h2><a href="http://localhost/preferences/category/prefs1/">Preferences 1</a></h2><div class="discreet"></div>
+      <br />
+     <h2><a href="http://localhost/preferences/category/prefs2/">Preferences 2</a></h2><div class="discreet"></div>
   ...
   </html>
+
+
 
   >>> user.getLink('Preferences 1').click()
   >>> user.getControl('Name').value = 'Nikolay'
